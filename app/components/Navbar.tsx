@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center text-sm text-white w-[80vw]">
-      <div className="flex justify-start gap-6 items-center w-[30%]">
+    <nav className="flex justify-between items-center text-sm text-white w-[70vw]">
+      {/* <div className="flex justify-start gap-6 items-center w-[30%]">
         <Link className="bg-[#424242] border rounded-2xl p-1" href={"/"}>
           All
         </Link>
@@ -20,7 +20,7 @@ const Navbar = () => {
         >
           Playlists
         </Link>
-      </div>
+      </div> */}
       <div className="flex justify-center items-center w-[50%] p-1 border rounded-sm">
         <Search />
         <input

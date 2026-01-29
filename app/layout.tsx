@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,16 +22,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${roboto.variable}`}>
-        <div>
-          <Header />
+        {/* Header */}
+        <Header />
+
+        {/* Layout below header */}
+        <div className="flex h-[calc(100vh-60px)]">
+          {/* Sidebar */}
+          <Sidebar />
+
+          {/* Main content */}
+          <main className="flex flex-col px-5 py-5 gap-6 w-screen bg-[#000812]">
+            <Navbar />
+            {children}
+          </main>
         </div>
-        {children}
       </body>
     </html>
   );
