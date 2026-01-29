@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import ReduxProvider from "./StoreProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,8 +39,10 @@ export default function RootLayout({
 
           {/* Main content */}
           <main className="flex flex-col px-5 py-5 gap-6 w-screen bg-[#000812]">
-            <Navbar />
-            {children}
+            <ReduxProvider>
+              <Navbar />
+              {children}
+            </ReduxProvider>
           </main>
         </div>
       </body>
