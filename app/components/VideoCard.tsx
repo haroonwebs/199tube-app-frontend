@@ -9,7 +9,7 @@ const VideoCard = () => {
   return (
     <div
       onClick={handleClick}
-      className="flex flex-col justify-center items-center gap-4 w-[288px] h-63"
+      className="flex flex-col justify-center items-center gap-4 w-[288px] h-63 hover:w-74.5 hover:h-65"
     >
       <div className="w-[288px] h-40.5">
         <Image
@@ -23,7 +23,7 @@ const VideoCard = () => {
       <div className="flex items-center w-[288px] gap-3 h-22.5">
         <div>
           <Image
-            className=" rounded-b-lg object-cover"
+            className=" rounded-lg object-cover"
             src="/haroon.jpg"
             alt="Banner"
             width={50}
