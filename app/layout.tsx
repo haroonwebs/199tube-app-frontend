@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import ReduxProvider from "./StoreProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ReactQueryProvider from "./ReactQueryProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,8 +21,6 @@ export const metadata: Metadata = {
   title: "199tube-intertainment",
   description: "app to explore videos",
 };
-
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -42,12 +40,12 @@ export default function RootLayout({
 
           {/* Main content */}
           <main className="flex flex-col px-5 py-5 gap-6 w-screen bg-[#000812]">
-            <ReduxProvider>
-              <QueryClientProvider client={queryClient}>
+            <ReactQueryProvider>
+              <ReduxProvider>
                 <Navbar />
                 {children}
-              </QueryClientProvider>
-            </ReduxProvider>
+              </ReduxProvider>
+            </ReactQueryProvider>
           </main>
         </div>
       </body>
