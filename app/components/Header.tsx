@@ -5,6 +5,8 @@ import Link from "next/link";
 const Header = () => {
   const user = localStorage.getItem("user");
 
+  console.log(user);
+
   return (
     <div className="flex justify-between items-center px-5 h-15 bg-[#0E0E0F] text-xl text-white">
       <Link href={"/"}>

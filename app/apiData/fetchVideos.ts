@@ -1,6 +1,6 @@
-import axios from "axios";
+import { axiosInstance } from "./axiosInstance/axiosinstance";
 
 export const FetchVideos = async () => {
-  const res = await axios.get("http://localhost:8000/api/v1/videos/");
+  const res = await axiosInstance.get("/videos/");
   return res.data;
 };

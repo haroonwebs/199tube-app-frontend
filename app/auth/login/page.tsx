@@ -2,10 +2,27 @@
 import { useRef } from "react";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { LoginUser } from "@/app/apiData/loginUser";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: LoginUser,
+    onSuccess: () => {
+      if (emailRef?.current?.value) emailRef.current.value = "";
+      if (passwordRef?.current?.value) passwordRef.current.value = "";
+      toast.success("User login successfully");
+      router.push("/");
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Signup failed");
+    },
+  });
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -14,6 +31,8 @@ const Login = () => {
       email: emailRef?.current?.value,
       password: passwordRef?.current?.value,
     };
+
+    mutate(userData);
   };
 
   return (
@@ -79,7 +98,7 @@ const Login = () => {
             type="submit"
             className="w-full bg-linear-to-r from-black to-gray-600 text-white py-2 rounded-lg font-semibold hover:scale-105 transition-transform duration-200 shadow-md"
           >
-            Login
+            {isPending ? "Sending" : "Login"}
           </button>
         </form>
       </div>

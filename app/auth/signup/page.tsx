@@ -2,19 +2,41 @@
 import { useRef } from "react";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { RegisterUser } from "@/app/apiData/registerUser";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const avatarRef = useRef<HTMLInputElement>(null);
 
-  const handleRegister = async (e: any) => {
+  const router = useRouter();
+
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: RegisterUser,
+    onSuccess: () => {
+      toast.success("Account created successfully");
+      router.push("/auth/login");
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message || "Signup failed");
+    },
+  });
+
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    const userData = {
-      email: emailRef?.current?.value,
-      password: passwordRef?.current?.value,
-      username: usernameRef?.current?.value,
-    };
+    const formData = new FormData();
+
+    formData.append("username", usernameRef.current?.value || "");
+    formData.append("email", emailRef.current?.value || "");
+    formData.append("password", passwordRef.current?.value || "");
+
+    if (avatarRef.current?.files?.[0]) {
+      formData.append("avatar", avatarRef.current.files[0]);
+    }
+    mutate(formData);
   };
 
   return (
@@ -80,6 +102,21 @@ const SignUp = () => {
               <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
             </div>
           </div>
+          {/* choose avatar */}
+          <div>
+            <label className="text-sm font-semibold text-gray-600">
+              Avatar
+            </label>
+            <div className="relative mt-1">
+              <input
+                type="file"
+                placeholder="chose avatar image"
+                required
+                ref={avatarRef}
+                className="px-2 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+              />
+            </div>
+          </div>
 
           {/* Login link */}
           <p className="text-sm text-center text-gray-600">
@@ -97,7 +134,7 @@ const SignUp = () => {
             type="submit"
             className="w-full bg-linear-to-r from-black to-gray-600 text-white py-2 rounded-lg font-semibold text-lg hover:scale-105 transition-transform duration-200 shadow-md"
           >
-            Sign Up
+            {isPending ? "Sending" : "Signup"}
           </button>
         </form>
       </div>
