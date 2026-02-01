@@ -1,8 +1,11 @@
+"use client";
+import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import Link from "next/link";
 
 const Navbar = () => {
-  return (
+  const pathname = usePathname();
+  return pathname !== "/auth/login" && pathname !== "/auth/signup" ? (
     <nav className="flex justify-between items-center text-sm text-white w-[70vw]">
       {/* <div className="flex justify-start gap-6 items-center w-[30%]">
         <Link className="bg-[#424242] border rounded-2xl p-1" href={"/"}>
@@ -30,7 +33,7 @@ const Navbar = () => {
         />
       </div>
     </nav>
-  );
+  ) : null;
 };
 
 export default Navbar;

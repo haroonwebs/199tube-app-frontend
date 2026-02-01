@@ -1,8 +1,15 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-Image;
 const Header = () => {
+  const [user, setUser] = useState<string | null>(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    setUser(storedUser);
+  }, []);
+
   return (
     <div className="flex justify-between items-center px-5 h-15 bg-[#0E0E0F] text-xl text-white">
       <Link href={"/"}>
@@ -14,15 +21,19 @@ const Header = () => {
           height={150}
         />
       </Link>
-      <Link href={"/user-dashboard"}>
-        <Image
-          className=" rounded-lg object-cover border-0 hover:border-2 hover:border-amber-50"
-          src="/haroon.jpg"
-          alt="Banner"
-          width={50}
-          height={50}
-        />
-      </Link>
+      {user ? (
+        <Link href={"/user-dashboard"}>
+          <Image
+            className=" rounded-lg object-cover border-0 hover:border-2 hover:border-amber-50"
+            src="/haroon.jpg"
+            alt="Banner"
+            width={50}
+            height={50}
+          />
+        </Link>
+      ) : (
+        <Link href={"/auth/login"}>Login</Link>
+      )}
     </div>
   );
 };
