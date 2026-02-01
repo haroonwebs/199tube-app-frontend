@@ -1,11 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Header = () => {
-  const user = localStorage.getItem("user");
-
-  console.log(user);
+  const [user, setUser] = useState<string | null>(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    setUser(storedUser);
+  }, []);
 
   return (
     <div className="flex justify-between items-center px-5 h-15 bg-[#0E0E0F] text-xl text-white">
