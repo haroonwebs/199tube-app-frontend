@@ -2,7 +2,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { FetchUserSubscriptions } from "../apiData/fetchUserSubscriptions";
 
-const subscriptions = ({ subscriberId }: { subscriberId?: string }) => {
+const subscriptions = () => {
+  const subscriberId = "696fdcc6a1c250fa369a960a";
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["subscriber", subscriberId],
     queryFn: () => FetchUserSubscriptions(subscriberId),
@@ -15,7 +17,7 @@ const subscriptions = ({ subscriberId }: { subscriberId?: string }) => {
     <h1 className="text-2xl text-white">Loading...</h1>
   ) : (
     <div className="text-2xl text-white">
-      <h1>{data}</h1>
+      <h1>{data?.message}</h1>
     </div>
   );
 };
