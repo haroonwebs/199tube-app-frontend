@@ -44,7 +44,10 @@ const Header = () => {
               height={50}
             />
           </Link>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} disabled={isPending}>
+            {" "}
+            {isPending ? "Logging out..." : "Logout"}
+          </button>
         </div>
       ) : (
         <Link href={"/auth/login"}>Login</Link>

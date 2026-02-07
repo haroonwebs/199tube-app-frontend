@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import videoReducer from "./slices/VideoSlice";
+import UserReducer from "./slices/authSlice";
 
 export const Store = () => {
   return configureStore({
     reducer: {
       videos: videoReducer,
+      user: UserReducer,
     },
   });
 };

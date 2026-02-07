@@ -42,23 +42,23 @@ export default function RootLayout({
           theme="light"
         />
         {/* Header */}
-        <Header />
+        <ReactQueryProvider>
+          <Header />
 
-        {/* Layout below header */}
-        <div className="flex h-[calc(100vh-60px)]">
-          {/* Sidebar */}
-          <Sidebar />
+          {/* Layout below header */}
+          <div className="flex h-[calc(100vh-60px)]">
+            {/* Sidebar */}
+            <Sidebar />
 
-          {/* Main content */}
-          <main className="flex flex-col px-5 py-5 gap-6 w-screen bg-[#000812]">
-            <ReactQueryProvider>
+            {/* Main content */}
+            <main className="flex flex-col px-5 py-5 gap-6 w-screen bg-[#000812]">
               <ReduxProvider>
                 <Navbar />
                 {children}
               </ReduxProvider>
-            </ReactQueryProvider>
-          </main>
-        </div>
+            </main>
+          </div>
+        </ReactQueryProvider>
       </body>
     </html>
   );
