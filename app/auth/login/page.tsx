@@ -5,15 +5,20 @@ import Link from "next/link";
 import { LoginUser } from "@/app/apiData/loginUser";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { setUser } from "@/app/store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: LoginUser,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log("data", data);
+      dispatch(setUser(data?.LoggedInUser));
       if (emailRef?.current?.value) emailRef.current.value = "";
       if (passwordRef?.current?.value) passwordRef.current.value = "";
       toast.success("User login successfully");
