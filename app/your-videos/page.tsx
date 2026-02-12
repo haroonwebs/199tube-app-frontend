@@ -1,11 +1,6 @@
-import React from "react";
-
+import PostVideoFormPopUp from "../components/PostVideoFormPopUp";
 const yourvideos = () => {
-  return (
-    <div className="text-2xl text-white">
-      <h1>here are my uploaded videos</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default yourvideos;
