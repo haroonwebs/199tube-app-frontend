@@ -1,25 +1,32 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Logout } from "../apiData/logout";
 import { useRouter } from "next/navigation";
+import { useAppSelector, useAppDispatch } from "../store/hooks/hooks";
+import { logout } from "../store/slices/authSlice";
+import { toast } from "react-toastify";
 
 const Header = () => {
-  const [user, setUser] = useState<string | null>(null);
+  const user = useAppSelector((state) => state?.user);
+  const dispatch = useAppDispatch();
+
   const queryClient = useQueryClient();
   const router = useRouter();
   const { mutate, isPending } = useMutation({
     mutationFn: Logout,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log("data", data);
+      toast.success(data?.message);
       queryClient.clear();
-      router.push("/login");
+      router.push("/auth/login");
     },
   });
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     mutate();
+    dispatch(logout());
   };
 
   return (
@@ -33,8 +40,12 @@ const Header = () => {
           height={150}
         />
       </Link>
-      {user ? (
-        <div>
+      {user?.user !== null ? (
+        <div className="flex gap-2">
+          <button onClick={handleLogout} disabled={isPending}>
+            {" "}
+            {isPending ? "Logging out..." : "Logout"}
+          </button>
           <Link href={"/user-dashboard"}>
             <Image
               className=" rounded-lg object-cover border-0 hover:border-2 hover:border-amber-50"
@@ -44,10 +55,6 @@ const Header = () => {
               height={50}
             />
           </Link>
-          <button onClick={handleLogout} disabled={isPending}>
-            {" "}
-            {isPending ? "Logging out..." : "Logout"}
-          </button>
         </div>
       ) : (
         <Link href={"/auth/login"}>Login</Link>
