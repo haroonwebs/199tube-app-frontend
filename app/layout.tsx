@@ -29,9 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${roboto.variable} flex flex-col min-h-screen`}
-      >
+      <body className={`${inter.variable} ${roboto.variable} flex flex-col`}>
         <ToastContainer
           position="top-right"
           autoClose={3000}
