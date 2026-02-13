@@ -1,10 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingBasket } from "lucide-react";
 
 const Navbar = () => {
-  const [openVideoForm, setOpenVideoForm] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-linear-to-r from-black to-blue-950 text-white fixed w-full z-20 top-0 start-0 border-b border-default">
@@ -22,73 +40,69 @@ const Navbar = () => {
             OutfitZone
           </span>
         </Link>
-        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
           <button
             type="button"
-            className="flex text-sm bg-neutral-primary rounded-full md:me-0 focus:ring-4 focus:ring-neutral-tertiary"
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
+            onClick={() => setOpenDropdown((prev) => !prev)}
+            className="flex text-sm bg-neutral-primary rounded-full"
           >
-            <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
               src="/199tube-logo.webp"
               alt="user photo"
             />
           </button>
-
-          <div
-            className="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
-            id="user-dropdown"
-          >
-            <div className="px-4 py-3 text-sm border-b border-default">
-              <span className="block text-heading font-medium">
-                Joseph McFall
-              </span>
-              <span className="block text-body truncate">
-                name@flowbite.com
-              </span>
-            </div>
-            <ul
-              className="p-2 text-sm text-body font-medium"
-              aria-labelledby="user-menu-button"
+          {openDropdown && (
+            <div
+              ref={dropdownRef}
+              className="absolute right-14 sm:right-4 top-10 z-50 border border-default-medium rounded-base shadow-lg w-44 bg-linear-to-r from-black to-blue-950 animate-fadeIn"
             >
-              <li>
-                <Link
-                  href="#"
-                  className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                >
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                >
-                  Settings
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                >
-                  Earnings
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                >
-                  Sign out
-                </Link>
-              </li>
-            </ul>
-          </div>
+              <div className="px-4 py-3 text-sm border-b border-default">
+                <span className="block text-heading font-medium">
+                  Joseph McFall
+                </span>
+                <span className="block text-body truncate">
+                  name@flowbite.com
+                </span>
+              </div>
+
+              <ul className="p-2 text-sm text-body font-medium">
+                <li>
+                  <Link
+                    href="#"
+                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                  >
+                    Settings
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                  >
+                    Earnings
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                  >
+                    Sign out
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+
           <button
             data-collapse-toggle="navbar-user"
             type="button"
