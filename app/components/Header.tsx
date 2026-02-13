@@ -17,7 +17,6 @@ const Header = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: Logout,
     onSuccess: (data) => {
-      console.log("data", data);
       toast.success(data?.message);
       queryClient.clear();
       router.push("/auth/login");
