@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import ReduxProvider from "./StoreProvider";
 import ReactQueryProvider from "./ReactQueryProvider";
@@ -45,15 +44,8 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ReduxProvider>
             <Header />
-
-            {/* Layout below header */}
-            <div className="flex h-[calc(100vh-60px)]">
-              {/* Sidebar */}
-              <Sidebar />
-
-              {/* Main content */}
-              <main className="flex flex-col px-5 py-5 gap-6 w-screen bg-[#000812]">
-                <Navbar />
+            <div>
+              <main className="flex flex-col gap-2  h-[calc(100vh-60px)] w-screen bg-[#000812]">
                 {children}
               </main>
             </div>
