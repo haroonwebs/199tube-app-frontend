@@ -10,14 +10,9 @@ const contact = () => {
     queryFn: () => FetchUserSubscriptions(subscriberId),
   });
 
-  if (error?.message)
-    return <h1 className="text-2xl text-white">{error?.message}</h1>;
-
-  return isLoading ? (
-    <h1 className="text-2xl text-white">Loading...</h1>
-  ) : (
-    <div className="text-2xl text-white">
-      <h1>{data?.message}</h1>
+  return (
+    <div className="flex justify-center items-center text-2xl text-white min-h-screen">
+      <h1>contact us </h1>
     </div>
   );
 };

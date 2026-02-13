@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className="bg-linear-to-r from-black to-blue-950 text-white fixed w-full z-20 top-0 start-0 border-b border-default">
       <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
-          href="https://flowbite.com/"
+          href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
