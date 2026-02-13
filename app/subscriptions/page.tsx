@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FetchUserSubscriptions } from "../apiData/fetchUserSubscriptions";
 
-const subscriptions = () => {
+const contact = () => {
   const subscriberId = "696fdcc6a1c250fa369a960a";
 
   const { data, isLoading, error } = useQuery({
@@ -22,4 +22,4 @@ const subscriptions = () => {
   );
 };
 
-export default subscriptions;
+export default contact;

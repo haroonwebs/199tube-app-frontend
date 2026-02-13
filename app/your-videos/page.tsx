@@ -1,6 +1,5 @@
-import PostVideoFormPopUp from "../components/PostVideoFormPopUp";
-const yourvideos = () => {
-  return <div></div>;
+const orders = () => {
+  return <div>orders</div>;
 };
 
-export default yourvideos;
+export default orders;

@@ -1,17 +1,15 @@
 "use client";
-import { usePathname } from "next/navigation";
-import { Search } from "lucide-react";
-import { ImageUp } from "lucide-react";
 import { useState } from "react";
-import PostVideoFormPopUp from "./PostVideoFormPopUp";
+import Link from "next/link";
+import { ShoppingBasket } from "lucide-react";
 
 const Navbar = () => {
   const [openVideoForm, setOpenVideoForm] = useState(false);
 
   return (
-    <nav className="bg-blue-950 fixed w-full z-20 top-0 start-0 border-b border-default">
+    <nav className="bg-linear-to-r from-black to-blue-950 text-white fixed w-full z-20 top-0 start-0 border-b border-default">
       <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
+        <Link
           href="https://flowbite.com/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
@@ -21,9 +19,9 @@ const Navbar = () => {
             alt="Flowbite Logo"
           />
           <span className="self-center text-xl text-heading font-semibold whitespace-nowrap">
-            Flowbite
+            OutfitZone
           </span>
-        </a>
+        </Link>
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
@@ -58,36 +56,36 @@ const Navbar = () => {
               aria-labelledby="user-menu-button"
             >
               <li>
-                <a
+                <Link
                   href="#"
                   className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
                 >
                   Dashboard
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
                 >
                   Settings
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
                 >
                   Earnings
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#"
                   className="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
                 >
                   Sign out
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -123,45 +121,37 @@ const Navbar = () => {
         >
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
             <li>
-              <a
-                href="#"
+              <Link
+                href={"/"}
                 className="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
                 aria-current="page"
               >
-                Home
-              </a>
+                Products
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href={"/orders"}
                 className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
               >
-                About
-              </a>
+                Orders
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-              >
-                Services
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-              >
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
+              <Link
+                href={"/contact"}
                 className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
               >
                 Contact
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={"/cart"}
+                className="md:flex block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
+              >
+                Cart <ShoppingBasket />
+              </Link>
             </li>
           </ul>
         </div>

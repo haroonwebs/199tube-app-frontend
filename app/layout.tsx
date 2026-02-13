@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import Navbar from "./components/Navbar";
 import ReduxProvider from "./StoreProvider";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,7 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${roboto.variable}`}>
+      <body
+        className={`${inter.variable} ${roboto.variable} flex flex-col min-h-screen`}
+      >
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -44,11 +46,10 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ReduxProvider>
             <Header />
-            <div>
-              <main className="flex flex-col gap-2  h-[calc(100vh-60px)] w-screen bg-[#000812]">
-                {children}
-              </main>
-            </div>
+            <main className="min-h-screen bg-linear-to-r from-black to-blue-950">
+              {children}
+            </main>
+            <Footer />
           </ReduxProvider>
         </ReactQueryProvider>
       </body>
