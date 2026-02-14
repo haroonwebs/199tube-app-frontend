@@ -5,6 +5,8 @@ import { ShoppingBasket } from "lucide-react";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,6 +16,7 @@ const Navbar = () => {
         !dropdownRef.current.contains(event.target as Node)
       ) {
         setOpenDropdown(false);
+        setMobileMenuOpen(false);
       }
     };
 
@@ -22,10 +25,10 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [dropdownRef]);
 
   return (
-    <nav className="bg-linear-to-r from-black to-blue-950 text-white fixed w-full z-20 top-0 start-0 border-b border-default">
+    <nav className="bg-linear-to-r from-black to-blue-950 text-white fixed w-full z-20 top-0 start-0">
       <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href="/"
@@ -36,7 +39,7 @@ const Navbar = () => {
             className="h-7"
             alt="Flowbite Logo"
           />
-          <span className="self-center text-xl text-heading font-semibold whitespace-nowrap">
+          <span className="self-center text-xl text-heading font-semibold whitespace-nowrap hover:text-blue-600">
             OutfitZone
           </span>
         </Link>
@@ -70,7 +73,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     href="#"
-                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                    className="block p-2 hover:text-blue-600 rounded"
                   >
                     Dashboard
                   </Link>
@@ -78,7 +81,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     href="#"
-                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                    className="block p-2 hover:text-blue-600 rounded"
                   >
                     Settings
                   </Link>
@@ -86,7 +89,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     href="#"
-                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                    className="block p-2 hover:text-blue-600 rounded"
                   >
                     Earnings
                   </Link>
@@ -94,7 +97,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     href="#"
-                    className="block p-2 hover:bg-neutral-tertiary-medium rounded"
+                    className="block p-2 hover:text-red-600 rounded"
                   >
                     Sign out
                   </Link>
@@ -104,11 +107,11 @@ const Navbar = () => {
           )}
 
           <button
-            data-collapse-toggle="navbar-user"
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
             aria-controls="navbar-user"
-            aria-expanded="false"
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="sr-only">Open main menu</span>
             <svg
@@ -130,39 +133,35 @@ const Navbar = () => {
           </button>
         </div>
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-          id="navbar-user"
+          ref={dropdownRef}
+          className={`items-center justify-between md:flex md:w-auto md:order-1 ${
+            mobileMenuOpen ? "flex" : "hidden"
+          }`}
         >
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
+          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4  md:flex-row md:space-x-8 md:mt-0">
             <li>
               <Link
-                href={"/"}
-                className="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
+                href={"/products"}
+                className="py-2 px-3 text-white bg-brand hover:text-blue-600"
                 aria-current="page"
               >
                 Products
               </Link>
             </li>
             <li>
-              <Link
-                href={"/orders"}
-                className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-              >
+              <Link href={"/orders"} className="py-2 px-3 hover:text-blue-600">
                 Orders
               </Link>
             </li>
             <li>
-              <Link
-                href={"/contact"}
-                className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
-              >
+              <Link href={"/contact"} className="py-2 px-3 hover:text-blue-600">
                 Contact
               </Link>
             </li>
             <li>
               <Link
                 href={"/cart"}
-                className="md:flex block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent"
+                className="flex gap-1 py-2 px-3 hover:text-blue-600 md:p-0"
               >
                 Cart <ShoppingBasket />
               </Link>
