@@ -2,12 +2,14 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingBasket } from "lucide-react";
+import { useAppSelector } from "../store/hooks/hooks";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const cartItems = useAppSelector((state) => state?.cart?.cartItems || []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -164,6 +166,11 @@ const Navbar = () => {
                 className="flex gap-1 py-2 px-3 hover:text-blue-600 md:p-0"
               >
                 Cart <ShoppingBasket />
+                {cartItems.length > 0 && (
+                  <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                    {cartItems.length}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>
