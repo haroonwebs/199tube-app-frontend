@@ -1,9 +1,15 @@
 "use client";
 import QuantityIncrementDecrementButton from "../components/QuantityIncrementDecrementButton";
-import { useAppSelector } from "../store/hooks/hooks";
-
+import { useAppSelector, useAppDispatch } from "../store/hooks/hooks";
+import { orderPriceSum } from "../helpers/orderPriceSum";
+import { removeCartItem } from "../store/slices/cartSlice";
+import Link from "next/link";
 const cart = () => {
   const cartItems = useAppSelector((state) => state?.cart?.cartItems || []);
+  const dispatch = useAppDispatch();
+
+  const OrderTotalPrice = orderPriceSum(cartItems);
+  const discount = OrderTotalPrice > 500 ? 50 : 0;
 
   return (
     <section className="py-18 antialiased">
@@ -37,7 +43,9 @@ const cart = () => {
                         <label htmlFor="counter-input-3" className="sr-only">
                           Choose quantity:
                         </label>
-                        <QuantityIncrementDecrementButton productId="product-id" />
+                        <QuantityIncrementDecrementButton
+                          productId={item._id}
+                        />
 
                         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                           <p className="text-base font-medium text-gray-900  dark:text-white">
@@ -50,9 +58,13 @@ const cart = () => {
                             <p className="inline-flex items-center text-sm font-medium text-white">
                               Price : ${item?.price}
                             </p>
+                            <p className="inline-flex items-center text-sm font-medium text-white">
+                              Total Price : ${item?.price * item?.quantity}
+                            </p>
                             <button
                               type="button"
                               className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+                              onClick={() => dispatch(removeCartItem(item._id))}
                             >
                               <svg
                                 className="me-1.5 h-5 w-5"
@@ -95,62 +107,53 @@ const cart = () => {
                         Original price
                       </dt>
                       <dd className="text-base font-medium text-gray-900 dark:text-white">
-                        $7,592.00
+                        ${OrderTotalPrice}
                       </dd>
                     </dl>
 
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                        Savings
+                        Discount over $500
                       </dt>
                       <dd className="text-base font-medium text-green-600">
-                        -$299.00
+                        -${discount}
                       </dd>
                     </dl>
 
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                        Store Pickup
+                        Delivery Charges
                       </dt>
                       <dd className="text-base font-medium text-gray-900 dark:text-white">
-                        $99
-                      </dd>
-                    </dl>
-
-                    <dl className="flex items-center justify-between gap-4">
-                      <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                        Tax
-                      </dt>
-                      <dd className="text-base font-medium text-gray-900 dark:text-white">
-                        $799
+                        $5
                       </dd>
                     </dl>
                   </div>
 
                   <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                     <dt className="text-base font-bold text-gray-900 dark:text-white">
-                      Total
+                      Total Amount
                     </dt>
                     <dd className="text-base font-bold text-gray-900 dark:text-white">
-                      $8,191.00
+                      ${OrderTotalPrice - discount + 5}
                     </dd>
                   </dl>
                 </div>
 
-                <a
-                  href="#"
+                <Link
+                  href={"/checkout"}
                   className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Proceed to Checkout
-                </a>
+                </Link>
 
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                     {" "}
                     or{" "}
                   </span>
-                  <a
-                    href="#"
+                  <Link
+                    href={"/products"}
                     title=""
                     className="inline-flex items-center gap-2 text-sm font-medium text-primary-700 underline hover:no-underline dark:text-primary-500"
                   >
@@ -170,7 +173,7 @@ const cart = () => {
                         d="M19 12H5m14 0-4 4m4-4-4-4"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

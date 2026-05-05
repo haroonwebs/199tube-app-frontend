@@ -64,7 +64,7 @@ const QuantityIncrementDecrementButton = ({
           type="text"
           value={quantity}
           readOnly
-          className="w-10 text-center text-sm font-medium bg-transparent border-0"
+          className="w-10 text-center text-white text-sm font-medium bg-transparent border-0"
         />
 
         {/* Increment */}
