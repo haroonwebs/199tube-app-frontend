@@ -8,9 +8,10 @@ import { products } from "../constantProducts";
 type Product = {
   id: string;
   title: string;
-  color: string;
+  colors: string[];
   price: number;
   image: string;
+  description: string;
 };
 
 const ProductCard = () => {
@@ -23,6 +24,8 @@ const ProductCard = () => {
         _id: product.id,
         name: product.title,
         price: product.price,
+        image: product.image,
+        description: product.description,
         quantity: 1,
       }),
     );
@@ -52,7 +55,7 @@ const ProductCard = () => {
             <div className="mt-4 flex justify-between px-2">
               <div>
                 <h3 className="text-sm text-white">{product.title}</h3>
-                <p className="mt-1 text-sm text-gray-300">{product.color}</p>
+                {/* <p className="mt-1 text-sm text-gray-300">{product.colors}</p> */}
               </div>
               <div>
                 <p className="text-sm font-medium text-white ml-10">

@@ -1,4 +1,19 @@
-const page = () => {
+import { products } from "@/app/constantProducts";
+
+type ProductPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+const page = async ({ params }: ProductPageProps) => {
+  const { id } = await params;
+  const product = products.find((p) => p.id === id);
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div className="mt-10">
       <div className="bg-transparent">
@@ -11,14 +26,16 @@ const page = () => {
             /> */}
 
             <img
-              src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg"
-              alt="Model wearing plain white basic tee."
+              src={product.image}
+              alt={product.title}
               className="row-span-2 aspect-4/5 size-full object-cover sm:rounded-lg lg:aspect-3/4"
             />
 
             <div className="mt-4 px-4 sm:px-0 lg:mt-0">
-              <h2 className="text-2xl text-white">Product information</h2>
-              <p className="text-3xl tracking-tight text-white">$192</p>
+              <h2 className="text-2xl text-white">{product.title}</h2>
+              <p className="text-3xl tracking-tight text-white">
+                ${product.price}
+              </p>
 
               <form className="mt-10">
                 {/* <!-- Colors --> */}
@@ -29,33 +46,24 @@ const page = () => {
 
                   <fieldset aria-label="Choose a color" className="mt-4">
                     <div className="flex items-center gap-x-3">
-                      <div className="flex rounded-full outline -outline-offset-1 outline-white/10">
-                        <input
-                          type="radio"
-                          name="color"
-                          value="white"
-                          aria-label="White"
-                          className="size-8 appearance-none rounded-full bg-white forced-color-adjust-none checked:outline-2 checked:outline-offset-2 checked:outline-gray-400 focus-visible:outline-3 focus-visible:outline-offset-3"
-                        />
-                      </div>
-                      <div className="flex rounded-full outline -outline-offset-1 outline-white/10">
-                        <input
-                          type="radio"
-                          name="color"
-                          value="gray"
-                          aria-label="Gray"
-                          className="size-8 appearance-none rounded-full bg-gray-200 forced-color-adjust-none checked:outline-2 checked:outline-offset-2 checked:outline-gray-400 focus-visible:outline-3 focus-visible:outline-offset-3"
-                        />
-                      </div>
-                      <div className="flex rounded-full outline -outline-offset-1 outline-white/10">
-                        <input
-                          type="radio"
-                          name="color"
-                          value="black"
-                          aria-label="Black"
-                          className="size-8 appearance-none rounded-full bg-gray-900 forced-color-adjust-none checked:outline-2 checked:outline-offset-2 checked:outline-gray-400 focus-visible:outline-3 focus-visible:outline-offset-3"
-                        />
-                      </div>
+                      {product.colors.map((color, index) => (
+                        <label
+                          key={index}
+                          className="relative flex cursor-pointer items-center justify-center"
+                        >
+                          <input
+                            type="radio"
+                            name="color"
+                            value={color}
+                            className="peer sr-only"
+                          />
+
+                          <div
+                            className="size-8 rounded-full border border-gray-300 peer-checked:ring-2 peer-checked:ring-gray-400"
+                            style={{ backgroundColor: color }}
+                          />
+                        </label>
+                      ))}
                     </div>
                   </fieldset>
                 </div>
@@ -70,111 +78,23 @@ const page = () => {
 
                   <fieldset aria-label="Choose a size" className="mt-4">
                     <div className="grid grid-cols-4 gap-3">
-                      <label
-                        aria-label="XXS"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          disabled
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          XXS
-                        </span>
-                      </label>
-                      <label
-                        aria-label="XS"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          XS
-                        </span>
-                      </label>
-                      <label
-                        aria-label="S"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          S
-                        </span>
-                      </label>
-                      <label
-                        aria-label="M"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          M
-                        </span>
-                      </label>
-                      <label
-                        aria-label="L"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          L
-                        </span>
-                      </label>
-                      <label
-                        aria-label="XL"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          XL
-                        </span>
-                      </label>
-                      <label
-                        aria-label="2XL"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          2XL
-                        </span>
-                      </label>
-                      <label
-                        aria-label="3XL"
-                        className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600 has-disabled:border-gray-400 has-disabled:bg-gray-200 has-disabled:opacity-25"
-                      >
-                        <input
-                          type="radio"
-                          name="size"
-                          className="absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
-                        />
-                        <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
-                          3XL
-                        </span>
-                      </label>
+                      {product.sizes.map((size, index) => (
+                        <label
+                          key={index}
+                          className="group relative flex items-center justify-center rounded-md border border-gray-300 bg-white p-3 has-checked:border-indigo-600 has-checked:bg-indigo-600 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-indigo-600"
+                        >
+                          <input
+                            type="radio"
+                            name="size"
+                            value={size}
+                            className="absolute inset-0 appearance-none focus:outline-none cursor-pointer"
+                          />
+
+                          <span className="text-sm font-medium text-gray-900 uppercase group-has-checked:text-white">
+                            {size}
+                          </span>
+                        </label>
+                      ))}
                     </div>
                   </fieldset>
                 </div>
@@ -192,7 +112,7 @@ const page = () => {
           <div className="mx-auto px-4 pt-10 pb-16 sm:px-6 lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
             <div className="lg:col-span-2 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                Basic Tee 6-Pack
+                {product.title}
               </h1>
             </div>
 
@@ -202,14 +122,7 @@ const page = () => {
                 <h3 className="text-xl text-white">Description</h3>
 
                 <div className="space-y-6">
-                  <p className="text-base text-white">
-                    The Basic Tee 6-Pack allows you to fully express your
-                    vibrant personality with three grayscale options. Feeling
-                    adventurous? Put on a heather gray tee. Want to be a
-                    trendsetter? Try our exclusive colorway: &quot;Black&quot;.
-                    Need to add an extra pop of color to your outfit? Our white
-                    tee has you covered.
-                  </p>
+                  <p className="text-base text-white">{product.description}</p>
                 </div>
               </div>
 
