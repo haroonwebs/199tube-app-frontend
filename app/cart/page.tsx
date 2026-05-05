@@ -37,7 +37,9 @@ const cart = () => {
                         <label htmlFor="counter-input-3" className="sr-only">
                           Choose quantity:
                         </label>
-                        <QuantityIncrementDecrementButton productId="product-id" />
+                        <QuantityIncrementDecrementButton
+                          productId={item._id}
+                        />
 
                         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                           <p className="text-base font-medium text-gray-900  dark:text-white">
@@ -49,6 +51,9 @@ const cart = () => {
                           <div className="flex items-center gap-4">
                             <p className="inline-flex items-center text-sm font-medium text-white">
                               Price : ${item?.price}
+                            </p>
+                            <p className="inline-flex items-center text-sm font-medium text-white">
+                              Total Price : ${item?.price * item?.quantity}
                             </p>
                             <button
                               type="button"
