@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { addCartItem, removeCartItem } from "../store/slices/cartSlice";
+import { useAppDispatch } from "../store/hooks/hooks";
+import { products } from "../constantProducts";
 
 type Product = {
-  id: number;
+  id: string;
   title: string;
   color: string;
   price: number;
@@ -12,16 +15,18 @@ type Product = {
 
 const ProductCard = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  // ✅ Dummy Products (12 items)
-  const products: Product[] = Array.from({ length: 8 }, (_, i) => ({
-    id: i + 1,
-    title: `Basic Tee ${i + 1}`,
-    color: "Black",
-    price: 35 + i,
-    image:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-01.jpg",
-  }));
+  const handleAddToCart = (product: Product) => {
+    dispatch(
+      addCartItem({
+        _id: product.id,
+        name: product.title,
+        price: product.price,
+        quantity: 1,
+      }),
+    );
+  };
 
   return (
     <div className="mx-auto max-w-screen px-4 sm:px-6 sm:py-24 lg:px-8">
@@ -55,6 +60,7 @@ const ProductCard = () => {
                 </p>
                 <button
                   type="button"
+                  onClick={() => handleAddToCart(product)}
                   className="inline-flex cursor-pointer items-center text-white bg-brand  box-border border border-gray-600 hover:border-2 focus:ring-1 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-2 py-2 focus:outline-none"
                 >
                   <svg
