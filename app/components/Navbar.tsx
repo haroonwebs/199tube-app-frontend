@@ -165,9 +165,9 @@ const Navbar = () => {
                 href={"/cart"}
                 className="flex gap-1 py-2 px-3 hover:text-blue-600 md:p-0"
               >
-                Cart <ShoppingBasket className="relative" />
+                Cart <ShoppingBasket />
                 {cartItems.length > 0 && (
-                  <span className="absolute top-2 right-113.5 inline-flex items-center justify-center px-1  text-sm font-bold leading-none text-red-700 bg-amber-50 rounded-full">
+                  <span className=" inline-flex items-center justify-center px-1  text-sm font-bold leading-none text-red-700 bg-amber-50 rounded-full">
                     {cartItems.length}
                   </span>
                 )}
