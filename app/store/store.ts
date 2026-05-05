@@ -3,6 +3,7 @@ import videoReducer from "./slices/VideoSlice";
 import UserReducer from "./slices/authSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import CartReducer from "./slices/cartSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: UserReducer,
   videos: videoReducer,
+  cart: CartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
