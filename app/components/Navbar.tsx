@@ -55,7 +55,7 @@ const Navbar = () => {
           ref={dropdownRef}
         >
           {/* Desktop User Dropdown */}
-          {user && (
+          {user ? (
             <>
               <button
                 type="button"
@@ -107,6 +107,28 @@ const Navbar = () => {
                 </div>
               )}
             </>
+          ) : (
+            <ul className="p-2 text-sm">
+              <li>
+                <Link
+                  href="/auth/login"
+                  className="block hover:text-blue-600"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  Login
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/auth/signup"
+                  className="block hover:text-blue-600"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  Signup
+                </Link>
+              </li>
+            </ul>
           )}
 
           {/* Mobile Cart */}
