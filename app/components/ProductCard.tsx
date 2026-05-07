@@ -35,7 +35,7 @@ const ProductCard = () => {
   };
 
   return (
-    <div className="mx-auto max-w-screen px-4 sm:px-6 sm:py-24 lg:px-8">
+    <div className="mx-auto max-w-screen pb-3 px-4 sm:px-6 sm:py-6 lg:px-8">
       <h2 className="text-2xl font-bold tracking-tight text-white">
         Top Products
       </h2>
