@@ -14,6 +14,7 @@ const Navbar = () => {
 
   const cartItems = useAppSelector((state) => state?.cart?.cartItems || []);
   const user = useAppSelector((state) => state.user.user);
+  // const user = null;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -73,7 +74,7 @@ const Navbar = () => {
                 <div className="absolute right-0 top-12 z-50 border rounded shadow-lg w-44 bg-linear-to-r from-black to-blue-950">
                   <div className="px-4 py-3 text-sm border-b border-gray-700">
                     <span className="block font-medium">{user.fullName}</span>
-                    <span className="block truncate">{user.email}</span>
+                    <span className="block truncate">{user?.email}</span>
                   </div>
 
                   <ul className="p-2 text-sm">
@@ -108,12 +109,12 @@ const Navbar = () => {
               )}
             </>
           ) : (
-            <ul className="p-2 text-sm">
+            <ul className="font-medium flex flex-row space-x-8">
               <li>
                 <Link
                   href="/auth/login"
                   className="block hover:text-blue-600"
-                  onClick={() => setSidebarOpen(false)}
+                  // onClick={() => setSidebarOpen(false)}
                 >
                   Login
                 </Link>
@@ -123,7 +124,7 @@ const Navbar = () => {
                 <Link
                   href="/auth/signup"
                   className="block hover:text-blue-600"
-                  onClick={() => setSidebarOpen(false)}
+                  // onClick={() => setSidebarOpen(false)}
                 >
                   Signup
                 </Link>
