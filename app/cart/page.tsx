@@ -4,6 +4,8 @@ import { useAppSelector, useAppDispatch } from "../store/hooks/hooks";
 import { orderPriceSum } from "../helpers/orderPriceSum";
 import { removeCartItem } from "../store/slices/cartSlice";
 import Link from "next/link";
+import Image from "next/image";
+
 const cart = () => {
   const cartItems = useAppSelector((state) => state?.cart?.cartItems || []);
   const dispatch = useAppDispatch();
@@ -12,7 +14,7 @@ const cart = () => {
   const discount = OrderTotalPrice > 500 ? 50 : 0;
 
   return (
-    <section className="py-18 antialiased">
+    <section className="py-2 antialiased">
       <div className="mx-auto max-w-7xl px-4 2xl:px-0">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
           Shopping Cart
@@ -30,22 +32,25 @@ const cart = () => {
                   className="mx-auto w-full flex flex-col mb-1 lg:max-w-2xl xl:max-w-4xl"
                 >
                   <div className="space-y-6">
-                    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
+                    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-linear-to-r from-black to-blue-950 md:p-6">
                       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                        <a href="#" className="shrink-0 md:order-1">
-                          <img
-                            className="h-20 w-20 "
+                        <div className="flex md:flex-col items-center gap-4">
+                          <Image
                             src={item?.image}
-                            alt="imac image"
+                            alt={item?.name || "Product image"}
+                            width={160}
+                            height={160}
+                            className="h-40 w-40 object-cover"
+                            loading="lazy"
                           />
-                        </a>
 
-                        <label htmlFor="counter-input-3" className="sr-only">
-                          Choose quantity:
-                        </label>
-                        <QuantityIncrementDecrementButton
-                          productId={item._id}
-                        />
+                          <label htmlFor="counter-input-3" className="sr-only">
+                            Choose quantity:
+                          </label>
+                          <QuantityIncrementDecrementButton
+                            productId={item._id}
+                          />
+                        </div>
 
                         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                           <p className="text-base font-medium text-gray-900  dark:text-white">
