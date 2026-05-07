@@ -18,8 +18,12 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "199tube-intertainment",
-  description: "app to explore videos",
+  title: "OutFit Zone",
+  description:
+    "Match your style with our trendy collection of clothing and accessories.",
+  icons: {
+    icon: "/outfitzonelogo.png",
+  },
 };
 
 export default function RootLayout({
