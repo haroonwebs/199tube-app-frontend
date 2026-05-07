@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBasket, X } from "lucide-react";
 import { useAppSelector } from "../store/hooks/hooks";
 
@@ -40,14 +41,17 @@ const Navbar = () => {
       <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-7"
-            alt="Logo"
+          <Image
+            src="/outfitzonelogo.webp"
+            alt="OutfitZone Logo"
+            width={110}
+            height={110}
+            loading="lazy"
+            className="transition-transform duration-300 hover:scale-110 border-2 border-transparent hover:border-blue-600 rounded-full"
           />
-          <span className="self-center text-xl font-semibold whitespace-nowrap hover:text-blue-600">
+          {/* <span className="self-center text-xl font-semibold whitespace-nowrap hover:text-blue-600">
             OutfitZone
-          </span>
+          </span> */}
         </Link>
 
         {/* Right Side */}

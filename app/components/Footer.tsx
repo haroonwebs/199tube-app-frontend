@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -8,14 +9,17 @@ const Footer = () => {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <Link href="/" className="flex items-center">
-                <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-7 me-3"
-                  alt="FlowBite Logo"
+                <Image
+                  src="/outfitzonelogo.webp"
+                  alt="OutfitZone Logo"
+                  width={110}
+                  height={110}
+                  loading="lazy"
+                  className="transition-transform duration-300 hover:scale-110 border-2 border-transparent hover:border-blue-600 rounded-full"
                 />
-                <span className="text-heading self-center hover:text-blue-600 text-2xl font-semibold whitespace-nowrap">
+                {/* <span className="text-heading self-center hover:text-blue-600 text-2xl font-semibold whitespace-nowrap">
                   OutfitZone
-                </span>
+                </span> */}
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
