@@ -14,8 +14,8 @@ const Navbar = () => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const cartItems = useAppSelector((state) => state?.cart?.cartItems || []);
-  const user = useAppSelector((state) => state.user.user);
-  // const user = null;
+  // const user = useAppSelector((state) => state.user.user);
+  const user = null;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -76,10 +76,10 @@ const Navbar = () => {
 
               {openDropdown && (
                 <div className="absolute right-0 top-12 z-50 border rounded shadow-lg w-44 bg-linear-to-r from-black to-blue-950">
-                  <div className="px-4 py-3 text-sm border-b border-gray-700">
+                  {/* <div className="px-4 py-3 text-sm border-b border-gray-700">
                     <span className="block font-medium">{user.fullName}</span>
                     <span className="block truncate">{user?.email}</span>
-                  </div>
+                  </div> */}
 
                   <ul className="p-2 text-sm">
                     <li>
@@ -113,7 +113,7 @@ const Navbar = () => {
               )}
             </>
           ) : (
-            <ul className="font-medium flex flex-row space-x-8">
+            <ul className="hidden sm:flex flex-row font-medium space-x-8">
               <li>
                 <Link
                   href="/auth/login"
@@ -262,10 +262,10 @@ const Navbar = () => {
 
               {user ? (
                 <>
-                  <li className="pt-4 border-t border-gray-700">
+                  {/* <li className="pt-4 border-t border-gray-700">
                     <p className="font-medium">{user.fullName}</p>
                     <p className="text-sm text-gray-300">{user.email}</p>
-                  </li>
+                  </li> */}
 
                   <li>
                     <Link

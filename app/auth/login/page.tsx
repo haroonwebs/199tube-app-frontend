@@ -40,12 +40,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-20 ml-100">
-      <div className="w-full max-w-sm bg-linear-to-r from-white to-gray-400 rounded-2xl shadow-2xl p-4 animate-fadeIn">
+    <div className="flex items-center justify-center p-2 sm:p-0 mt-10 sm:mt-20 sm:ml-100">
+      <div className="w-full max-w-sm bg-linear-to-r from-blue-800 to-gray-800 rounded-2xl shadow-2xl p-4 animate-fadeIn">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Login</h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <h2 className="text-3xl font-bold text-white">Login</h2>
+          <p className="text-sm text-gray-300 mt-1">
             Login to continue your journey
           </p>
         </div>
@@ -54,7 +54,7 @@ const Login = () => {
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-white">
               Email Address
             </label>
             <div className="relative mt-1">
@@ -63,7 +63,7 @@ const Login = () => {
                 placeholder="you@example.com"
                 required
                 ref={emailRef}
-                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none text-white focus:ring-1 focus:ring-white focus:border-0"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">📧</span>
             </div>
@@ -71,23 +71,21 @@ const Login = () => {
 
           {/* Password */}
           <div>
-            <label className="text-sm font-semibold text-gray-600">
-              Password
-            </label>
+            <label className="text-sm font-semibold text-white">Password</label>
             <div className="relative mt-1">
               <input
                 type="password"
                 placeholder="••••••••"
                 required
                 ref={passwordRef}
-                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none text-white focus:ring-1 focus:ring-white focus:border-0"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
             </div>
           </div>
 
           {/* Signup */}
-          <p className="text-sm text-center text-gray-600">
+          <p className="text-sm text-center text-gray-300">
             Don’t have an account?
             <Link
               href="/auth/signup"
