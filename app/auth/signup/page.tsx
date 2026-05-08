@@ -40,12 +40,12 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-20 ml-100">
-      <div className="w-full max-w-sm bg-linear-to-r from-white to-gray-400 rounded-2xl shadow-2xl p-4">
+    <div className="flex items-center justify-center p-2 sm:p-0 mt-10 sm:mt-20 sm:ml-100">
+      <div className="w-full max-w-sm bg-linear-to-r from-blue-800 to-gray-800 rounded-2xl shadow-2xl p-4">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <h2 className="text-3xl font-bold text-white">Create Account</h2>
+          <p className="text-sm text-gray-300 mt-1">
             Join us and start your journey
           </p>
         </div>
@@ -54,16 +54,14 @@ const SignUp = () => {
         <form onSubmit={handleRegister} className="space-y-4">
           {/* Username */}
           <div>
-            <label className="text-sm font-semibold text-gray-600">
-              Username
-            </label>
+            <label className="text-sm font-semibold text-white">Username</label>
             <div className="relative mt-1">
               <input
                 type="text"
                 placeholder="yourname"
                 required
                 ref={usernameRef}
-                className="w-full pl-10 pr-3 py-2 bg-gray-100 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none text-white focus:ring-1 focus:ring-white focus:border-0"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">👤</span>
             </div>
@@ -71,7 +69,7 @@ const SignUp = () => {
 
           {/* Email */}
           <div>
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-white">
               Email Address
             </label>
             <div className="relative mt-1">
@@ -80,7 +78,7 @@ const SignUp = () => {
                 placeholder="you@example.com"
                 required
                 ref={emailRef}
-                className="w-full pl-10 pr-3 py-2 bg-gray-100 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none text-white focus:ring-1 focus:ring-white focus:border-0"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">📧</span>
             </div>
@@ -88,38 +86,34 @@ const SignUp = () => {
 
           {/* Password */}
           <div>
-            <label className="text-sm font-semibold text-gray-600">
-              Password
-            </label>
+            <label className="text-sm font-semibold text-white">Password</label>
             <div className="relative mt-1">
               <input
                 type="password"
                 placeholder="••••••••"
                 required
                 ref={passwordRef}
-                className="w-full pl-10 pr-3 py-2 bg-gray-100 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+                className="w-full pl-10 pr-3 py-2 border rounded-lg outline-none text-white focus:ring-1 focus:ring-white focus:border-0"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
             </div>
           </div>
           {/* choose avatar */}
           <div>
-            <label className="text-sm font-semibold text-gray-600">
-              Avatar
-            </label>
+            <label className="text-sm font-semibold text-white">Avatar</label>
             <div className="relative mt-1">
               <input
                 type="file"
                 placeholder="chose avatar image"
                 required
                 ref={avatarRef}
-                className="px-2 border rounded-lg outline-none focus:ring-1 focus:ring-gray-800 focus:border-black"
+                className="w-full px-2 border rounded-lg outline-none text-white focus:ring-1 focus:ring-white focus:border-0"
               />
             </div>
           </div>
 
           {/* Login link */}
-          <p className="text-sm text-center text-gray-600">
+          <p className="text-sm text-center text-gray-300">
             Already have an account?
             <Link
               href="/auth/login"
