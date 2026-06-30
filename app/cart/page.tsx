@@ -16,7 +16,7 @@ const cart = () => {
   return (
     <section className="py-2 antialiased">
       <div className="mx-auto max-w-7xl px-4 2xl:px-0">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+        <h2 className="text-4xl tracking-tight font-extrabold text-white sm:text-2xl">
           Shopping Cart
         </h2>
         {cartItems.length === 0 ? (
