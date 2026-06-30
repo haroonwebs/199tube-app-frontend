@@ -1,11 +1,10 @@
 const orders = () => {
   return (
-    // <div className="flex justify-center items-center min-h-screen text-2xl text-white">
-    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+    <section className=" py-8 antialiased  md:py-2">
       <div className="mx-auto max-w-7xl px-4 2xl:px-0">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
           <div className="gap-4 sm:flex sm:items-center sm:justify-between">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+            <h2 className="text-4xl tracking-tight font-extrabold text-white sm:text-2xl">
               My orders
             </h2>
 
