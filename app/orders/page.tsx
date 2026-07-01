@@ -21,10 +21,16 @@ const orders = () => {
                   className="block w-full min-w-32 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                 >
                   <option>All orders</option>
-                  <option value="pre-order">Pre-order</option>
-                  <option value="transit">In transit</option>
-                  <option value="confirmed">Confirmed</option>
-                  <option value="cancelled">Cancelled</option>
+                  <option value="pre-order">Pending</option>
+                  <option value="transit">Confirmed</option>
+                  <option value="confirmed">Processing</option>
+                  <option value="cancelled">Out for Delivery</option>
+                  <option value="pre-order">Delivered</option>
+                  <option value="transit">Completed</option>
+                  <option value="confirmed">Cancelled</option>
+                  <option value="cancelled">Returned</option>
+                  <option value="pre-order">Failed Delivery</option>
+                  <option value="transit">On Hold</option>
                 </select>
               </div>
 
@@ -90,8 +96,8 @@ const orders = () => {
                   <dt className="text-base font-medium text-gray-500 dark:text-gray-400">
                     Status:
                   </dt>
-                  <dd className="me-2 mt-1.5 inline-flex items-center rounded  px-2.5 py-0.5 text-xs font-medium  ">
-                    Pre-order
+                  <dd className="me-2 mt-1.5 inline-flex items-center rounded  px-2.5 py-0.5 text-xs font-medium text-red-500 ">
+                    Pending
                   </dd>
                 </dl>
 
