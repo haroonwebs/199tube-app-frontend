@@ -5,8 +5,7 @@ export const products = [
     colors: ["#000000", "#FFFFFF", "#808080", "#001F3F"],
     sizes: ["S", "M", "L", "XL"],
     price: 35,
-    image:
-      "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    image: "/longsleave.png",
     description:
       "A soft and comfortable everyday t-shirt made with premium cotton.\nPerfect for casual wear and layering in all seasons.",
   },
